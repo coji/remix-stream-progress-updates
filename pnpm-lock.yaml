@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@remix-run/css-bundle':
-    specifier: ^2.4.1
-    version: 2.4.1
   '@remix-run/node':
     specifier: ^2.4.1
     version: 2.4.1(typescript@5.3.3)
@@ -1277,11 +1274,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /@remix-run/css-bundle@2.4.1:
-    resolution: {integrity: sha512-+Gl/bj8yfkVAlimbZZnTgzrrQJgnhV2xNNGc0lMXekEiDobk7DTTyonAXqrkxaRYGvMhBVwMaaDKWUE1iy4fHg==}
-    engines: {node: '>=18.0.0'}
-    dev: false
 
   /@remix-run/dev@2.4.1(@remix-run/serve@2.4.1)(typescript@5.3.3)(vite@5.0.10):
     resolution: {integrity: sha512-T8GLCKpZ8AX/NCJ+vyMmcTq328xo9stvDSXG2hSJx7njz4Q9sC25miQLXPRb3Lx/Sdf4YlJhWQpR6uq5pnXCZg==}

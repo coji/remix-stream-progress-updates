@@ -20,7 +20,8 @@
 			"jsxQuoteStyle": "single",
 			"quoteStyle": "single",
 			"semicolons": "asNeeded",
-			"trailingComma": "all"
+			"trailingComma": "all",
+			"arrowParentheses": "asNeeded"
 		}
 	},
 	"vcs": {
