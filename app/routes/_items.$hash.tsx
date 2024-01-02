@@ -1,4 +1,4 @@
-import fs from 'node:fs/promises'
+import fs from 'node:fs'
 import path from 'node:path'
 import { type LoaderFunctionArgs, defer, redirect } from '@remix-run/node'
 import { Await, useLoaderData, useParams } from '@remix-run/react'
@@ -11,7 +11,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   if (!hash) return redirect('/')
 
   const pathname = path.join('public', 'items', `${hash}.json`)
-  const file = await fs.readFile(pathname, 'utf-8')
+  const file = await fs.readFileSync(pathname)
   if (!file) return redirect('/')
 
   const item = JSON.parse(file.toString()) as Item
@@ -26,7 +26,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   return defer({
     promise: new Promise<Item>((resolve) => {
       const interval = setInterval(() => {
-        const file = fs.readFile(pathname, 'utf-8')
+        const file = fs.readFileSync(pathname, 'utf-8')
         if (!file) return
         const item = JSON.parse(file.toString()) as Item
         if (!item) return
@@ -50,7 +50,7 @@ export default function ItemPage() {
   return (
     <div>
       <Suspense fallback={<span> {stream}% </span>}>
-        <Await resolve={data.promise} errorElement={<p>Error loading img!</p>}>
+        <Await resolve={data.promise} errorElement={<p>Error loading JSON</p>}>
           {(item) => <div>{item.message}</div>}
         </Await>
       </Suspense>
