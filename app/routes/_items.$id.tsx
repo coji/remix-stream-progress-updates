@@ -1,7 +1,4 @@
-import fs from 'node:fs'
-import path from 'node:path'
 import { type LoaderFunctionArgs, defer, redirect } from '@remix-run/node'
-import { getFile } from '@remix-run/node/dist/sessions/fileStorage'
 import { Await, useLoaderData, useParams } from '@remix-run/react'
 import { Suspense } from 'react'
 import { useEventSource } from 'remix-utils/sse/react'
