@@ -1,25 +1,15 @@
-import fs from 'node:fs/promises'
-import path from 'node:path'
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Link, Outlet, useLoaderData } from '@remix-run/react'
 import { AppNavLink } from '~/components/AppNavLink'
-import type { Item } from '~/types/item'
+import { listItemIds } from '~/services/long_running_process'
 
 export const loader = async (args: LoaderFunctionArgs) => {
-  const dir = await fs.readdir('./public/items', {
-    encoding: 'utf-8',
-    withFileTypes: true,
-  })
-
-  const items = dir
-    .filter((dirent) => dirent.isFile())
-    .map((dirent) => path.basename(dirent.name, '.json'))
-
-  return json({ items })
+  const itemIds = await listItemIds()
+  return json({ itemIds })
 }
 
 export default function Index() {
-  const { items } = useLoaderData<typeof loader>()
+  const { itemIds } = useLoaderData<typeof loader>()
 
   return (
     <div className='grid grid-rows-[auto_1fr_auto] h-screen gap-1'>
@@ -27,11 +17,11 @@ export default function Index() {
         <h1 className='text-2xl'>
           <Link to='/'>Remix streaming updates</Link>
         </h1>
-        <nav className='flex gap-2'>
-          {items.map((hash) => {
+        <nav className='flex gap-2 flex-wrap'>
+          {itemIds.map((id) => {
             return (
-              <AppNavLink key={hash} to={`/${hash}`}>
-                item {hash}
+              <AppNavLink key={id} to={`/${id}`}>
+                item {id}
               </AppNavLink>
             )
           })}

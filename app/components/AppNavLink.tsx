@@ -4,7 +4,7 @@ export const AppNavLink = ({ className, children, ...props }: NavLinkProps) => {
   return (
     <NavLink
       className={({ isActive }) =>
-        `rounded-md px-4 py-1 capitalize ${
+        `rounded-md px-4 py-1 ${
           isActive
             ? 'text-white bg-blue-500 hover:active:bg-blue-600'
             : 'bg-slate-100'
