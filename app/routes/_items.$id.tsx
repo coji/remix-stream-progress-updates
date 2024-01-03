@@ -19,15 +19,19 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   }
 
   return defer({
-    promise: new Promise<Item>((resolve) => {
+    promise: new Promise<Item>((resolve, reject) => {
       const interval = setInterval(async () => {
         const item = await getItemFromFile(id)
-        if (!item) return
+        if (!item) {
+          reject(new Error('Item not found'))
+          return
+        }
+
         if (item.progress === 100) {
           clearInterval(interval)
           resolve(item)
+          return
         }
-        return
       }, 100)
     }),
   })
